@@ -5,5 +5,5 @@ import { SnipStack } from "../lib/infrastructure";
 
 const app = new cdk.App();
 new SnipStack(app, "SnipStack", {
-  stackName: "snip-infra"
+  stackName: "snip-infra",
 });

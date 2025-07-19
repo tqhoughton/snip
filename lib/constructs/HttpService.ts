@@ -6,7 +6,9 @@ import * as lambda from "aws-cdk-lib/aws-lambda";
 export interface HttpServiceProps {
   name: string;
   entry: string;
-  env: Record<string, string>;
+  env?: Record<string, string>;
+  clusterArn: string;
+  clusterIdentifier: string;
 }
 
 export class HttpService extends Construct {
@@ -19,6 +21,7 @@ export class HttpService extends Construct {
       functionName: props.name,
       environment: {
         ...props.env,
+        DSQL_CLUSTER_ID: props.clusterIdentifier,
         RUST_LOG: "info",
         AWS_LAMBDA_EXEC_WRAPPER: "/opt/bootstrap",
         AWS_LWA_INVOKE_MODE: "response_stream",
@@ -37,6 +40,8 @@ export class HttpService extends Construct {
         ),
       ],
       bundling: {
+        // needed for dsql adapter
+        bundleAwsSDK: true,
         commandHooks: {
           afterBundling: (inputDir: string, outputDir: string): string[] => [
             `cp ${inputDir}/src/run.sh ${outputDir}`,
@@ -47,6 +52,13 @@ export class HttpService extends Construct {
         },
       },
     });
+
+    httpService.addToRolePolicy(
+      new cdk.aws_iam.PolicyStatement({
+        actions: ["dsql:DbConnectAdmin"],
+        resources: [props.clusterArn],
+      }),
+    );
 
     this.fnUrl = httpService.addFunctionUrl({
       authType: lambda.FunctionUrlAuthType.NONE,

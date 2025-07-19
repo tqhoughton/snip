@@ -11,6 +11,7 @@
     "cdk": "cdk",
     "format": "npx prettier . --write",
     "start": "npm run start:api & npm run tailwind -- --watch",
+    "db:migrate": "ts-node -r tsconfig-paths/register src/schemaManager.ts",
     "start:api": "nodemon --exec npx ts-node -r tsconfig-paths/register src/index.tsx",
     "tailwind": "npx tailwindcss -i ./src/globals.css -o ./public/styles/tailwind.css"
   },
@@ -20,6 +21,7 @@
     "@types/express": "^5.0.3",
     "@types/jest": "^29.5.14",
     "@types/node": "22.7.9",
+    "@types/pg": "^8.15.4",
     "aws-cdk": "2.1021.0",
     "esbuild": "^0.25.7",
     "jest": "^29.7.0",
@@ -31,13 +33,16 @@
     "typescript": "~5.6.3"
   },
   "dependencies": {
+    "@aws-sdk/dsql-signer": "^3.848.0",
     "@kitajs/html": "^4.2.9",
     "aws-cdk-lib": "2.205.0",
     "body-parser": "^2.2.0",
     "constructs": "^10.0.0",
     "dotenv": "^17.2.0",
+    "drizzle-orm": "^0.44.3",
     "express": "^5.1.0",
     "express-openid-connect": "^2.18.1",
+    "pg": "^8.16.3",
     "tailwindcss": "^4.1.11",
     "winston": "^3.17.0"
   }
