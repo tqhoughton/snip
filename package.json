@@ -5,9 +5,7 @@
     "snip": "bin/snip.js"
   },
   "scripts": {
-    "build": "tsc",
-    "watch": "tsc -w",
-    "test": "jest",
+    "tsc": "tsc",
     "cdk": "cdk",
     "format": "npx prettier . --write",
     "start": "npm run start:api & npm run tailwind -- --watch",
