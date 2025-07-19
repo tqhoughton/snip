@@ -29,7 +29,7 @@ export const handler = async () => {
     // migration or schema management tools for DSQL (yet)
     const migrations = await getAllMigrations();
     for (const migration of migrations) {
-      logger.info("Running migration: ", migration);
+      logger.info({ migration, msg: "Running migration" });
       await db.execute(migration);
     }
 
