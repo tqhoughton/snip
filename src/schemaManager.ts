@@ -34,7 +34,7 @@ export const handler = async ({ destroy = false }: MigrateEvent) => {
     const migrations = await getAllMigrations();
 
     if (destroy) {
-      await db.execute(`DROP TABLE IF EXISTS snippet;`)
+      await db.execute(`DROP TABLE IF EXISTS snippet;`);
       return { msg: "Schema destroyed" };
     }
 
@@ -67,7 +67,7 @@ export const handler = async ({ destroy = false }: MigrateEvent) => {
 
 if (require.main === module) {
   const destroy = process.argv.includes("--destroy");
-  handler({ destroy})
+  handler({ destroy })
     .then((result) => {
       logger.info("Migrations completed successfully", result);
       process.exit(0);
