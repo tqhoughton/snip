@@ -18,7 +18,11 @@ const getAllMigrations = async function () {
   return Promise.all(migrations);
 };
 
-export const handler = async () => {
+export interface MigrateEvent {
+  destroy?: boolean;
+}
+
+export const handler = async ({ destroy = false }: MigrateEvent) => {
   let client: Client | undefined;
 
   try {
@@ -28,9 +32,16 @@ export const handler = async () => {
     // extremely primitive migration system since there are no
     // migration or schema management tools for DSQL (yet)
     const migrations = await getAllMigrations();
+
+    if (destroy) {
+      await db.execute(`DROP TABLE IF EXISTS snippet;`)
+      return { msg: "Schema destroyed" };
+    }
+
     for (const migration of migrations) {
       logger.info({ migration, msg: "Running migration" });
-      await db.execute(migration);
+      const result = await db.execute(migration);
+      logger.info({ result, msg: "Migration result" });
     }
 
     // test snippet schema insertion and deletion
@@ -38,6 +49,7 @@ export const handler = async () => {
       content: "# Hello World!" + "\n" + "this is cool!",
       fullPath: "test/text.md",
       language: "markdown",
+      author: "test-user",
     });
 
     const snippets = await db.select().from(snippet);
@@ -54,7 +66,8 @@ export const handler = async () => {
 };
 
 if (require.main === module) {
-  handler()
+  const destroy = process.argv.includes("--destroy");
+  handler({ destroy})
     .then((result) => {
       logger.info("Migrations completed successfully", result);
       process.exit(0);

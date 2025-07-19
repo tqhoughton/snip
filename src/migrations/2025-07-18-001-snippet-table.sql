@@ -2,5 +2,8 @@ CREATE TABLE IF NOT EXISTS snippet (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   full_path TEXT NOT NULL,
   content TEXT NOT NULL,
-  language TEXT NOT NULL
-)
+  language TEXT NOT NULL,
+  author TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
