@@ -8,19 +8,37 @@
     "build": "tsc",
     "watch": "tsc -w",
     "test": "jest",
-    "cdk": "cdk"
+    "cdk": "cdk",
+    "format": "npx prettier . --write",
+    "start": "npm run start:api & npm run tailwind -- --watch",
+    "start:api": "nodemon --exec npx ts-node -r tsconfig-paths/register src/index.tsx",
+    "tailwind": "npx tailwindcss -i ./src/globals.css -o ./public/styles/tailwind.css"
   },
   "devDependencies": {
+    "@tailwindcss/cli": "^4.1.11",
+    "@types/body-parser": "^1.19.6",
+    "@types/express": "^5.0.3",
     "@types/jest": "^29.5.14",
     "@types/node": "22.7.9",
-    "jest": "^29.7.0",
-    "ts-jest": "^29.2.5",
     "aws-cdk": "2.1021.0",
+    "esbuild": "^0.25.7",
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.10",
+    "prettier": "^3.6.2",
+    "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "~5.6.3"
   },
   "dependencies": {
+    "@kitajs/html": "^4.2.9",
     "aws-cdk-lib": "2.205.0",
-    "constructs": "^10.0.0"
+    "body-parser": "^2.2.0",
+    "constructs": "^10.0.0",
+    "dotenv": "^17.2.0",
+    "express": "^5.1.0",
+    "express-openid-connect": "^2.18.1",
+    "tailwindcss": "^4.1.11",
+    "winston": "^3.17.0"
   }
 }
