@@ -13,7 +13,10 @@ const getAllMigrations = async function () {
 
   const migrations = files
     .filter((file) => file.endsWith(".sql"))
-    .map(async (file) => ({ name: file, sql: await fs.readFile(path.join(migrationsDir, file), "utf-8") }))
+    .map(async (file) => ({
+      name: file,
+      sql: await fs.readFile(path.join(migrationsDir, file), "utf-8"),
+    }));
 
   return Promise.all(migrations);
 };
@@ -35,7 +38,9 @@ export const handler = async ({ reset = false }: MigrateEvent) => {
 
     for (const { name, sql } of migrations) {
       // skip reset migrations if reset flag not provided
-      if (!reset && name.includes('reset')) { continue; }
+      if (!reset && name.includes("reset")) {
+        continue;
+      }
 
       logger.info({ sql, msg: `Running migration ${name}` });
       const result = await db.execute(sql);
