@@ -13,16 +13,16 @@ const getAllMigrations = async function () {
 
   const migrations = files
     .filter((file) => file.endsWith(".sql"))
-    .map(async (file) => fs.readFile(path.join(migrationsDir, file), "utf-8"));
+    .map(async (file) => ({ name: file, sql: await fs.readFile(path.join(migrationsDir, file), "utf-8") }))
 
   return Promise.all(migrations);
 };
 
 export interface MigrateEvent {
-  destroy?: boolean;
+  reset?: boolean;
 }
 
-export const handler = async ({ destroy = false }: MigrateEvent) => {
+export const handler = async ({ reset = false }: MigrateEvent) => {
   let client: Client | undefined;
 
   try {
@@ -33,14 +33,12 @@ export const handler = async ({ destroy = false }: MigrateEvent) => {
     // migration or schema management tools for DSQL (yet)
     const migrations = await getAllMigrations();
 
-    if (destroy) {
-      await db.execute(`DROP TABLE IF EXISTS snippet;`);
-      return { msg: "Schema destroyed" };
-    }
+    for (const { name, sql } of migrations) {
+      // skip reset migrations if reset flag not provided
+      if (!reset && name.includes('reset')) { continue; }
 
-    for (const migration of migrations) {
-      logger.info({ migration, msg: "Running migration" });
-      const result = await db.execute(migration);
+      logger.info({ sql, msg: `Running migration ${name}` });
+      const result = await db.execute(sql);
       logger.info({ result, msg: "Migration result" });
     }
 
@@ -54,7 +52,7 @@ export const handler = async ({ destroy = false }: MigrateEvent) => {
 
     const snippets = await db.select().from(snippet);
 
-    await db.delete(snippet).where(eq(snippet.fullPath, "test/text.md"));
+    await db.delete(snippet).where(eq(snippet.author, "test-user"));
 
     return snippets;
   } catch (error) {
@@ -66,8 +64,8 @@ export const handler = async ({ destroy = false }: MigrateEvent) => {
 };
 
 if (require.main === module) {
-  const destroy = process.argv.includes("--destroy");
-  handler({ destroy })
+  const reset = process.argv.includes("--reset");
+  handler({ reset })
     .then((result) => {
       logger.info("Migrations completed successfully", result);
       process.exit(0);
