@@ -9,18 +9,14 @@ export const ErrorPage = ({ error }: Props) => {
   logger.error({ error, msg: "rendering error page" });
 
   return (
-    <main class="w-full max-w-lg flex-grow p-4 flex items-center justify-center">
-      <section>
-        <h2 class="text-3xl">Whoops!</h2>
+    <main class="font-['VT323'] w-full bg-black text-green-400 text-xl flex-grow flex items-center justify-center bg-crt">
+      <section class="max-w-lg bg-black p-4 border-2 border-green-400 shadow-[0_0_10px_#00ff00]">
+        <h2 class="text-4xl text-center">Oops.</h2>
         <code class="text-xl block mt-2 mb-4">
-          {error.message ?? "Internal Server Error"}
+          Error: {error.message ?? "Internal Server Error"}
         </code>
-        <p>Looks like you encountered an error.</p>
-        <p>
-          Please reload the page or go back to the{" "}
-          <a href="/" class="underline text-blue-500 hover:text-blue-700">
-            Home Page
-          </a>
+        <p class="mt-4">
+          Looks like you ran into an error. Don't worry, it happens to the best of us! Click <a class="underline" href="/">here</a> to return to the home page.
         </p>
       </section>
     </main>
