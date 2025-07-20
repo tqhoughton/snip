@@ -1,1 +1,19 @@
 @import "tailwindcss";
+
+@layer components {
+  .bg-crt {
+    @apply bg-repeat bg-gradient-to-b from-crt-start to-crt-end bg-size-[100%_10%] animate-crt;
+  }
+}
+
+@theme {
+  --color-crt-start: rgba(17, 20, 53, 0.1);
+  --color-crt-end: rgba(118, 255, 241, 0.1);
+  --animate-crt: bgscroll 6s linear infinite;
+
+  @keyframes bgscroll {
+    100% {
+      background-position: 0% 100%;
+    }
+  }
+}

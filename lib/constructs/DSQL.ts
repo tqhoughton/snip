@@ -1,5 +1,4 @@
 import { Construct } from "constructs";
-import * as cdk from "aws-cdk-lib";
 import * as dsql from "aws-cdk-lib/aws-dsql";
 
 export interface DSQLDatabaseProps {

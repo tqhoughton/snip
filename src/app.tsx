@@ -1,11 +1,13 @@
 import "dotenv/config";
 import "@kitajs/html";
 import express from "express";
-import { renderToStream } from "@kitajs/html/suspense";
 import { auth } from "express-openid-connect";
 import bodyParser from "body-parser";
 
-import { logger } from "src/common/logger";
+import { logger } from "src/utils/logger";
+import homeRouter from "src/routes/home";
+import settingsRouter from "src/routes/settings";
+import snippetsRouter from "src/routes/snippets";
 
 const app = express();
 const port = process.env["PORT"] || 8080;
@@ -33,9 +35,9 @@ app.use((_req, res, next) => {
   return next();
 });
 
-app.get("/", async (req, res) => {
-  renderToStream(<div>Hello World!</div>).pipe(res);
-});
+app.use('/', homeRouter);
+app.use('/settings', settingsRouter);
+app.use('/snippets', snippetsRouter);
 
 app.listen(port, () => {
   logger.info(`Example app listening at http://localhost:${port}`);

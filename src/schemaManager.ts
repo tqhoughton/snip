@@ -1,7 +1,7 @@
 import "dotenv/config";
 import { Client } from "pg";
 import { eq } from "drizzle-orm";
-import { logger } from "src/common/logger";
+import { logger } from "src/utils/logger";
 import { snippet } from "./db/schema";
 import { getDrizzleClient } from "./db/client";
 import fs from "fs/promises";
