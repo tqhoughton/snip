@@ -11,7 +11,9 @@
     "start": "npm run start:api & npm run tailwind -- --watch",
     "db:migrate": "ts-node -r tsconfig-paths/register src/schemaManager.ts",
     "start:api": "nodemon --exec npx ts-node -r tsconfig-paths/register src/app.tsx",
-    "tailwind": "npx tailwindcss -i ./src/globals.css -o ./public/styles/tailwind.css"
+    "tailwind": "npx tailwindcss -i ./src/globals.css -o ./public/styles/tailwind.css",
+    "generate-types": "cp ./node_modules/@kitajs/html/htmx.d.ts ./__types/htmx.d.ts",
+    "prepare": "npm run generate-types"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.1.11",

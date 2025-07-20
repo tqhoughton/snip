@@ -22,7 +22,10 @@ app.use((req, res, next) => {
   // for some reason https not detected in LWA apps
   // x-custom-domain-name is a custom header forwarded by cloudfront
   const protocol = process.env.LAMBDA_TASK_ROOT ? "https" : req.protocol;
-  const host = req.header("x-custom-domain-name") || req.header("x-forwarded-host") || req.get("host")
+  const host =
+    req.header("x-custom-domain-name") ||
+    req.header("x-forwarded-host") ||
+    req.get("host");
   const baseURL = `${protocol}://${host}`;
 
   return auth({
@@ -41,9 +44,9 @@ app.use((_req, res, next) => {
   return next();
 });
 
-app.use('/', homeRouter);
-app.use('/settings', settingsRouter);
-app.use('/snippets', snippetsRouter);
+app.use("/", homeRouter);
+app.use("/settings", settingsRouter);
+app.use("/snips", snippetsRouter);
 
 // catch-all route for 404 errors
 app.use((req, res) => {
@@ -57,7 +60,7 @@ app.use((req, res) => {
   );
 
   renderToStream(component).pipe(res);
-})
+});
 
 const errorHandler: () => ErrorRequestHandler =
   () => (error, req, res, _next) => {

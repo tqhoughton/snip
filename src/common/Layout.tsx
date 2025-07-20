@@ -39,7 +39,7 @@ export const Layout = ({ req, title, showHeader = true, children }: Props) => {
             crossorigin="anonymous"
           />
         </head>
-        <body class="bg-yellow-50 flex flex-col min-h-full flex-grow items-center justify-center relative">
+        <body class="bg-black flex flex-col min-h-full grow items-center justify-center relative">
           <ErrorBoundary
             catch={(err) => (
               <ErrorPage error={err instanceof Error ? err : new Error()} />
