@@ -6,7 +6,7 @@ import { SnippetsPage } from "./SnippetsPage";
 import { NewPage } from "./NewPage";
 import z from "zod";
 import assert from "assert";
-import { createSnippet } from "./queries";
+import { createSnippet, deleteSnippetByPath } from "./queries";
 
 const router = express.Router();
 
@@ -35,12 +35,23 @@ router.get("/", async (req, res) => {
 
 router.get("/*fullPath", async (req, res) => {
   // express does not type greedy params by default
-  assert('fullPath' in req.params && req.params.fullPath instanceof Array);
+  assert("fullPath" in req.params && req.params.fullPath instanceof Array);
   renderToStream(
     <Layout title="Snips" req={req}>
-      <SnippetsPage req={req} path={req.params.fullPath.join('/')} />
+      <SnippetsPage req={req} path={req.params.fullPath.join("/")} />
     </Layout>,
   ).pipe(res);
+});
+
+router.delete("/*fullPath", async (req, res) => {
+  assert(req.oidc.user);
+  // express does not type greedy params by default
+  assert("fullPath" in req.params && req.params.fullPath instanceof Array);
+  const fullPath = req.params.fullPath.join("/");
+
+  await deleteSnippetByPath(req.oidc.user.sub, fullPath)
+
+  res.setHeader("Hx-Redirect", `/snips`).send()
 });
 
 router.post("/", async (req, res) => {

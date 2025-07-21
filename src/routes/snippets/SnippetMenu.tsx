@@ -30,7 +30,7 @@ export const SnippetMenu = async ({ req }: Props) => {
             <li class="truncate max-w-60">
               <a
                 href={`/snips/${snippet.fullPath}`}
-                class="hover:underline lowercase text-xl"
+                class="hover:text-blue-500 hover:underline lowercase text-xl"
               >
                 {snippet.fullPath}
               </a>

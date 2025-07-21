@@ -30,3 +30,13 @@ export const getSnippetByPath = async (
     .where(and(eq(snippet.fullPath, fullPath), eq(snippet.author, author)));
   return result || null;
 };
+
+export const deleteSnippetByPath = async (
+  author: string,
+  fullPath: string,
+): Promise<void> => {
+  const db = await getDrizzleClient();
+  await db
+    .delete(snippet)
+    .where(and(eq(snippet.fullPath, fullPath), eq(snippet.author, author)));
+};
