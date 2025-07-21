@@ -1,10 +1,10 @@
-import type express from "express";
 import { SnippetMenu } from "./SnippetMenu";
 import assert from "assert";
 import { getSnippetByPath } from "./queries";
+import type { Request } from "src/utils/request";
 
 export interface Props {
-  req: express.Request;
+  req: Request;
   path?: string;
 }
 

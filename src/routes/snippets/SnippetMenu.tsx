@@ -2,9 +2,10 @@ import assert from "assert";
 import type express from "express";
 import { icons } from "feather-icons";
 import { getSnippetsByAuthor } from "./queries";
+import type { Request } from "src/utils/request";
 
 export interface Props {
-  req: express.Request;
+  req: Request;
 }
 
 export const SnippetMenu = async ({ req }: Props) => {

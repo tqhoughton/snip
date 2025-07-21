@@ -18,26 +18,25 @@ const snippetInput = z.object({
 router.use(requiresAuth());
 
 router.get("/new", async (req, res) => {
-  renderToStream(
-    <Layout title="Snips" req={req}>
+  renderToStream((rid) =>
+    <Layout rid={rid} title="Snips" req={req}>
       <NewPage req={req} />
     </Layout>,
   ).pipe(res);
 });
 
 router.get("/", async (req, res) => {
-  renderToStream(
-    <Layout title="Snips" req={req}>
+  renderToStream((rid) => 
+    <Layout rid={rid} title="Snips" req={req}>
       <SnippetsPage req={req} />
     </Layout>,
   ).pipe(res);
 });
 
-router.get("/*fullPath", async (req, res) => {
+router.get("/*fullPath", async (req: express.Request<{ fullPath: string[] }>, res) => {
   // express does not type greedy params by default
-  assert("fullPath" in req.params && req.params.fullPath instanceof Array);
-  renderToStream(
-    <Layout title="Snips" req={req}>
+  renderToStream((rid) =>
+    <Layout rid={rid} title="Snips" req={req}>
       <SnippetsPage req={req} path={req.params.fullPath.join("/")} />
     </Layout>,
   ).pipe(res);

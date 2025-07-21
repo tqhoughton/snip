@@ -1,8 +1,8 @@
-import type express from "express";
 import { SnippetMenu } from "./SnippetMenu";
+import type { Request } from "src/utils/request";
 
 export interface Props {
-  req: express.Request;
+  req: Request;
 }
 
 export const NewPage = ({ req }: Props) => {

@@ -4,16 +4,33 @@
   .bg-crt {
     @apply bg-repeat bg-gradient-to-b from-crt-start to-crt-end bg-size-[100%_10%] animate-crt;
   }
+  .text-loading {
+    @apply w-fit text-clip before:content-["Loading..."] animate-dots;
+
+    clip-path: inset(0 3ch 0 0);
+  }
 }
 
 @theme {
   --color-crt-start: rgba(17, 20, 53, 0.1);
   --color-crt-end: rgba(118, 255, 241, 0.1);
   --animate-crt: bgscroll 6s linear infinite;
+  --animate-dots: dots 1s steps(4) infinite;
 
   @keyframes bgscroll {
     100% {
       background-position: 0% 100%;
     }
   }
+
+  @keyframes dots {
+    to {
+      clip-path: inset(0 -1ch 0 0)
+    }
+  }
+}
+
+/* make it so suspense boundary elements do not disrupt layout */
+[data-sf] {
+  display: contents;
 }

@@ -50,8 +50,9 @@ app.use("/snips", snippetsRouter);
 
 // catch-all route for 404 errors
 app.use((req, res) => {
-  const component: JSX.Element = (
+  const component = (rid: string | number) => (
     <Layout
+      rid={rid}
       req={req}
       showHeader={true}
       title="Not Found"
@@ -66,9 +67,10 @@ const errorHandler: () => ErrorRequestHandler =
   () => (error, req, res, _next) => {
     logger.error({ error, msg: "encountered error in error handler" });
 
-    const component: JSX.Element =
+    const component = (rid: string | number) =>
       req.method === "GET" ? (
         <Layout
+          rid={rid}
           req={req}
           showHeader={true}
           title="Oops!"

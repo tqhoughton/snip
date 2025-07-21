@@ -6,8 +6,8 @@ import { Home } from "./Home";
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  renderToStream(
-    <Layout title="Snip" req={req}>
+  renderToStream((rid) =>
+    <Layout rid={rid} title="Snip" req={req}>
       <Home />
     </Layout>,
   ).pipe(res);

@@ -1,17 +1,27 @@
-import type express from "express";
 import { PropsWithChildren } from "@kitajs/html";
 import { ErrorBoundary } from "@kitajs/html/error-boundary";
+import { Suspense } from "@kitajs/html/suspense";
+import type { Request } from "src/utils/request";
+
 import { ErrorPage } from "./ErrorPage";
 import { HeaderBar } from "./HeaderBar";
 import { FooterBar } from "./FooterBar";
+import { Loading } from "./Loading";
 
 export interface Props extends PropsWithChildren {
+  rid: string | number;
   title: string;
   showHeader?: boolean;
-  req: express.Request;
+  req: Request;
 }
 
-export const Layout = ({ req, title, showHeader = true, children }: Props) => {
+export const Layout = ({
+  rid,
+  req,
+  title,
+  showHeader = true,
+  children,
+}: Props) => {
   return (
     <>
       {"<!doctype html>"}
@@ -39,7 +49,7 @@ export const Layout = ({ req, title, showHeader = true, children }: Props) => {
             crossorigin="anonymous"
           />
         </head>
-        <body class="bg-black flex flex-col min-h-full grow items-center justify-center relative">
+        <body class="bg-black flex flex-col min-h-full grow items-center justify-center">
           <ErrorBoundary
             catch={(err) => (
               <ErrorPage error={err instanceof Error ? err : new Error()} />
@@ -48,7 +58,12 @@ export const Layout = ({ req, title, showHeader = true, children }: Props) => {
             {showHeader && (
               <HeaderBar isLoggedIn={req.oidc.isAuthenticated()} />
             )}
-            {children}
+            <Suspense
+              rid={rid}
+              fallback={<Loading />}
+            >
+              {children}
+            </Suspense>
             <FooterBar />
           </ErrorBoundary>
         </body>
