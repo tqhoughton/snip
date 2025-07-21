@@ -11,8 +11,8 @@ export const SnippetMenu = async ({ req }: Props) => {
   assert(req.oidc.user);
   const snippets = await getSnippetsByAuthor(req.oidc.user.sub);
   return (
-    <nav class="p-4 min-w-60 border-r-2 border-green-400 font-mono">
-      <ul>
+    <nav class="p-4 border-r-2 border-green-400 font-mono">
+      <ul class="min-w-60">
         <li>
           <a href="/snips/new" class="lowercase text-xl">
             <button
