@@ -6,11 +6,11 @@ import { Home } from "./Home";
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  renderToStream((rid) =>
+  renderToStream((rid) => (
     <Layout rid={rid} title="Snip" req={req}>
       <Home />
-    </Layout>,
-  ).pipe(res);
+    </Layout>
+  )).pipe(res);
 });
 
 export default router;

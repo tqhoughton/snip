@@ -6,11 +6,11 @@ import { UnderConstruction } from "src/common/UnderConstruction";
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  renderToStream((rid) =>
+  renderToStream((rid) => (
     <Layout rid={rid} title="Under Construction" req={req}>
       <UnderConstruction />
-    </Layout>,
-  ).pipe(res);
+    </Layout>
+  )).pipe(res);
 });
 
 export default router;

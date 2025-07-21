@@ -58,10 +58,7 @@ export const Layout = ({
             {showHeader && (
               <HeaderBar isLoggedIn={req.oidc.isAuthenticated()} />
             )}
-            <Suspense
-              rid={rid}
-              fallback={<Loading />}
-            >
+            <Suspense rid={rid} fallback={<Loading />}>
               {children}
             </Suspense>
             <FooterBar />
