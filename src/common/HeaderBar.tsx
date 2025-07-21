@@ -16,12 +16,7 @@ export const HeaderBar = ({ isLoggedIn }: Props) => {
             <>
               <li>
                 <a href="/snips" class="hover:underline lowercase">
-                  Snippets
-                </a>
-              </li>
-              <li>
-                <a href="/snips" class="hover:underline lowercase">
-                  Snippets
+                  Snips
                 </a>
               </li>
               <li>
