@@ -18,7 +18,7 @@ export const NewPage = ({ req }: Props) => {
                 minlength={1}
                 name="fullPath"
                 type="text"
-                class="w-full p-2 bg-gray-800 text-green-400 placeholder-gray-600 border border-green-400"
+                class="font-mono w-full p-2 bg-gray-800 text-green-400 placeholder-gray-600 border border-green-400"
                 placeholder="my/folder/my-snippet"
               />
             </label>
@@ -31,7 +31,7 @@ export const NewPage = ({ req }: Props) => {
               <textarea
                 minlength={1}
                 name="content"
-                class="w-full p-2 bg-gray-800 text-green-400 placeholder-gray-600 border border-green-400"
+                class="font-mono w-full p-2 bg-gray-800 text-green-400 placeholder-gray-600 border border-green-400"
                 rows="16"
                 placeholder="Enter snippet content"
               ></textarea>

@@ -41,7 +41,7 @@ export const SnippetsPage = async ({ req, path }: Props) => {
               </button>
             </div>
           </div>
-          <pre class="bg-gray-800 p-4 rounded border border-green-400 whitespace-pre-wrap break-words">
+          <pre class="bg-gray-800 p-4 border border-green-400 whitespace-pre-wrap break-words">
             <code>{snippet.content}</code>
           </pre>
         </section>
