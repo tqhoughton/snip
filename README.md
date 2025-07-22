@@ -5,7 +5,7 @@ CDK project for a basic HTMX application using Aurora DSQL as the primary data s
 ## Useful commands
 
 - `npm run start` starts the API locally on http://localhost:8080
-- `npm run db:migrate`: runs the schemaManager and all SQL migrations
+- `npm run db:migrate` runs the schemaManager and all SQL migrations
 - `npm run tsc` compile typescript
 - `npx cdk deploy` deploy this stack to your default AWS account/region
 - `npx cdk diff` compare deployed stack with current state
