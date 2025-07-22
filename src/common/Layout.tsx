@@ -7,12 +7,14 @@ import { ErrorPage } from "./ErrorPage";
 import { HeaderBar } from "./HeaderBar";
 import { FooterBar } from "./FooterBar";
 import { Loading } from "./Loading";
+import { Empty } from "./Empty";
 
-export interface Props extends PropsWithChildren {
+export interface Props extends Required<PropsWithChildren> {
   rid: string | number;
   title: string;
   showHeader?: boolean;
   req: Request;
+  boosted?: boolean;
 }
 
 export const Layout = ({
@@ -22,6 +24,11 @@ export const Layout = ({
   showHeader = true,
   children,
 }: Props) => {
+  const boosted = req.headers["hx-boosted"] === "true";
+  if (boosted) {
+    return <Empty>{children}</Empty>
+  }
+
   return (
     <>
       {"<!doctype html>"}

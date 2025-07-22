@@ -36,7 +36,6 @@ router.get("/", async (req, res) => {
 router.get(
   "/*fullPath",
   async (req: express.Request<{ fullPath: string[] }>, res) => {
-    // express does not type greedy params by default
     renderToStream((rid) => (
       <Layout rid={rid} title="Snips" req={req}>
         <SnippetsPage req={req} path={req.params.fullPath.join("/")} />
