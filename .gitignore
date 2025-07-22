@@ -4,6 +4,9 @@
 *.d.ts
 node_modules
 
+# macOS files
+.DS_Store
+
 # CDK asset staging directory
 .cdk.staging
 cdk.out
