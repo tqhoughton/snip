@@ -14,7 +14,7 @@ export const SnippetsPage = async ({ req, path }: Props) => {
   const snippet = path && (await getSnippetByPath(req.oidc.user.sub, path));
 
   return (
-    <main class="font-['VT323'] w-full bg-black text-green-400 text-xl grow flex items-stretch justify-center">
+    <main class="font-['VT323'] w-full bg-black text-green-400 text-xl grow flex items-stretch">
       <SnippetMenu req={req} />
       {!snippet && (
         <section class="grow p-4 flex items-center justify-center">
@@ -23,19 +23,19 @@ export const SnippetsPage = async ({ req, path }: Props) => {
       )}
       {snippet && (
         <section class="grow p-8 pt-6">
-          <div class="flex items-center mb-4">
-            <h2 class="text-3xl mr-auto">{snippet.fullPath}</h2>
-            <div>
+          <div class="flex flex-wrap items-center mb-4">
+            <h2 class="text-3xl pr-4 mr-auto">{snippet.fullPath}</h2>
+            <div class="flex space-x-3">
               <a
                 href={`/snips/${snippet.fullPath}?mode=edit`}
-                class="text-green-400 hover:text-blue-500 hover:underline"
+                class="text-green-400 hover:text-yellow-300 hover:underline"
               >
                 Edit
               </a>
               <button
                 hx-confirm="Are you sure you want to delete this snippet? This cannot be undone."
                 hx-delete={`/snips/${snippet.fullPath}`}
-                class="cursor-pointer ml-4 text-green-400 hover:text-red-400 hover:underline"
+                class="cursor-pointer text-green-400 hover:text-red-400 hover:underline"
               >
                 Delete
               </button>

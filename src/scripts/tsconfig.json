@@ -1,0 +1,17 @@
+{
+  "extends": "../../tsconfig.json",
+  "files": [
+    "./resize.ts"
+  ],
+  "compilerOptions": {
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "noEmit": false,
+    "lib": ["es2022", "dom"],
+    "declaration": false,
+    "inlineSources": false,
+    "sourceMap": false,
+    "inlineSourceMap": false,
+    "outDir": "../../public/scripts"
+  }
+}

@@ -7,7 +7,7 @@ export interface Props {
 
 export const NewPage = ({ req }: Props) => {
   return (
-    <main class="w-full bg-black text-green-400 text-xl grow flex items-stretch justify-center">
+    <main class="w-full bg-black text-green-400 text-xl grow flex items-stretch">
       <SnippetMenu req={req} />
       <section class="grow p-8 pt-6">
         <form hx-post="/snips">

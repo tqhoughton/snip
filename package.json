@@ -8,16 +8,18 @@
     "tsc": "tsc",
     "cdk": "cdk",
     "format": "npx prettier . --write",
-    "start": "npm run start:api & npm run tailwind -- --watch",
+    "start": "npm run start:api & npm run tailwind -- --watch & npm run build:scripts -- -w",
     "db:migrate": "ts-node -r tsconfig-paths/register src/schemaManager.ts",
     "start:api": "nodemon --exec npx ts-node -r tsconfig-paths/register src/app.tsx",
     "tailwind": "npx tailwindcss -i ./src/globals.css -o ./public/styles/tailwind.css",
     "generate-types": "cp ./node_modules/@kitajs/html/htmx.d.ts ./__types/htmx.d.ts",
-    "prepare": "npm run generate-types"
+    "build:scripts": "tsc -p src/scripts/tsconfig.json",
+    "prepare": "npm run generate-types && npm run build:scripts"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.1.11",
     "@types/body-parser": "^1.19.6",
+    "@types/cookie-parser": "^1.4.9",
     "@types/express": "^5.0.3",
     "@types/feather-icons": "^4.29.4",
     "@types/jest": "^29.5.14",
@@ -40,6 +42,7 @@
     "body-parser": "^2.2.0",
     "clsx": "^2.1.1",
     "constructs": "^10.0.0",
+    "cookie-parser": "^1.4.7",
     "dotenv": "^17.2.0",
     "drizzle-orm": "^0.44.3",
     "express": "^5.1.0",

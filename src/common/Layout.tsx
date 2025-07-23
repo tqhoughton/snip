@@ -52,6 +52,7 @@ export const Layout = ({
             integrity="sha384-Akqfrbj/HpNVo8k11SXBb6TlBWmXXlYQrCSqEWmyKJe+hDm3Z/B2WVG4smwBkRVm"
             crossorigin="anonymous"
           />
+          <script src="https://unpkg.com/hyperscript.org@0.9.14"></script>
         </head>
         <body class="bg-black flex flex-col min-h-full grow items-center justify-center">
           <ErrorBoundary

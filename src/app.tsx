@@ -3,7 +3,7 @@ import "@kitajs/html";
 import express, { ErrorRequestHandler } from "express";
 import { auth } from "express-openid-connect";
 import bodyParser from "body-parser";
-
+import cookieParser from "cookie-parser";
 import { logger } from "src/utils/logger";
 import homeRouter from "src/routes/home";
 import settingsRouter from "src/routes/settings";
@@ -17,6 +17,7 @@ const app = express();
 const port = process.env["PORT"] || 8080;
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser())
 
 app.use((req, res, next) => {
   // for some reason https not detected in LWA apps
