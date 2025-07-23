@@ -15,18 +15,20 @@ export const HeaderBar = ({ isLoggedIn }: Props) => {
           {isLoggedIn ? (
             <>
               <li>
-                <a href="/snips" class="hover:underline lowercase flex space-x-2">
-                  <span class="mt-0.5">
-                    {feather.icons.scissors.toSvg()}
-                  </span>
+                <a
+                  href="/snips"
+                  class="hover:underline lowercase flex space-x-2"
+                >
+                  <span class="mt-0.5">{feather.icons.scissors.toSvg()}</span>
                   <span>Snips</span>
                 </a>
               </li>
               <li>
-                <a href="/settings" class="hover:underline lowercase flex space-x-2">
-                  <span class="mt-0.5">
-                    {feather.icons.settings.toSvg()}
-                  </span>
+                <a
+                  href="/settings"
+                  class="hover:underline lowercase flex space-x-2"
+                >
+                  <span class="mt-0.5">{feather.icons.settings.toSvg()}</span>
                   <span>Settings</span>
                 </a>
               </li>

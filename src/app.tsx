@@ -17,7 +17,7 @@ const app = express();
 const port = process.env["PORT"] || 8080;
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser())
+app.use(cookieParser());
 
 app.use((req, res, next) => {
   // for some reason https not detected in LWA apps

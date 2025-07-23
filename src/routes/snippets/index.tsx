@@ -45,14 +45,17 @@ router.get(
   },
 );
 
-router.delete("/*fullPath", async (req: express.Request<{ fullPath: string[] }>, res) => {
-  assert(req.oidc.user);
-  const fullPath = req.params.fullPath.join("/");
+router.delete(
+  "/*fullPath",
+  async (req: express.Request<{ fullPath: string[] }>, res) => {
+    assert(req.oidc.user);
+    const fullPath = req.params.fullPath.join("/");
 
-  await deleteSnippetByPath(req.oidc.user.sub, fullPath);
+    await deleteSnippetByPath(req.oidc.user.sub, fullPath);
 
-  res.setHeader("Hx-Redirect", `/snips`).send();
-});
+    res.setHeader("Hx-Redirect", `/snips`).send();
+  },
+);
 
 router.post("/", async (req, res) => {
   assert(req.oidc.user);

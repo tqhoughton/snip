@@ -11,12 +11,19 @@ export interface Props {
 
 export const SnippetMenu = async ({ req }: Props) => {
   assert(req.oidc.user);
-  const sideNavWidth = req.cookies.sideNavWidth
+  const sideNavWidth = req.cookies.sideNavWidth;
 
   const snippets = await getSnippetsByAuthor(req.oidc.user.sub);
   return (
-    <aside id="nav" class="border-r-2 border-green-400 font-mono min-w-60 w-60 max-w-2xl relative" style={sideNavWidth && { minWidth: sideNavWidth }}>
-      <div id="nav-border" class="absolute top-0 -right-[7px] bottom-0 w-3 cursor-col-resize">
+    <aside
+      id="nav"
+      class="border-r-2 border-green-400 font-mono min-w-60 w-60 max-w-2xl relative"
+      style={sideNavWidth && { minWidth: sideNavWidth }}
+    >
+      <div
+        id="nav-border"
+        class="absolute top-0 -right-[7px] bottom-0 w-3 cursor-col-resize"
+      >
         {/* PROBLEM: cannot figure out how to make each event register only register if needed and orchestrate cleanup */}
         {/* TODO: figure out how to make this deregister event listeners automatically */}
         {/* <script type="text/hyperscript">
