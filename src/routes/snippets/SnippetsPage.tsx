@@ -34,7 +34,7 @@ export const SnippetsPage = async ({ req, path }: Props) => {
               </a>
               <button
                 hx-confirm="Are you sure you want to delete this snippet? This cannot be undone."
-                hx-delete={`/snips/${snippet.fullPath}`}
+                hx-delete={`/snips/${snippet.id}`}
                 class="cursor-pointer text-green-400 hover:text-red-400 hover:underline"
               >
                 Delete

@@ -6,7 +6,8 @@ import { SnippetsPage } from "./SnippetsPage";
 import { NewPage } from "./NewPage";
 import z from "zod";
 import assert from "assert";
-import { createSnippet, deleteSnippetByPath } from "./queries";
+import { createSnippet, deleteSnippet } from "./queries";
+import type { Request } from "src/utils/request";
 
 const router = express.Router();
 
@@ -45,17 +46,12 @@ router.get(
   },
 );
 
-router.delete(
-  "/*fullPath",
-  async (req: express.Request<{ fullPath: string[] }>, res) => {
-    assert(req.oidc.user);
-    const fullPath = req.params.fullPath.join("/");
+router.delete("/:snipId", async (req, res) => {
+  assert(req.oidc.user);
+  await deleteSnippet({ author: req.oidc.user.sub, snipId: req.params.snipId });
 
-    await deleteSnippetByPath(req.oidc.user.sub, fullPath);
-
-    res.setHeader("Hx-Redirect", `/snips`).send();
-  },
-);
+  res.setHeader("Hx-Redirect", `/snips`).send();
+});
 
 router.post("/", async (req, res) => {
   assert(req.oidc.user);

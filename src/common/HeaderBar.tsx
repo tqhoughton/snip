@@ -11,7 +11,7 @@ export const HeaderBar = ({ isLoggedIn }: Props) => {
         <h1 class="text-lg md:text-3xl font-['VT323'] uppercase">Snip</h1>
       </a>
       <nav class="ml-3 font-mono">
-        <ul class="flex items-center space-x-3 md:space-x-8">
+        <ul class="flex items-center space-x-8">
           {isLoggedIn ? (
             <>
               <li>
