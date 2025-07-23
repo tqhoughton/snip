@@ -43,3 +43,8 @@ function stopResizing() {
   document.removeEventListener('mousemove', resizeSidenav);
   document.removeEventListener('mouseup', stopResizing);
 }
+
+// make sure the sidenav does not exceed the browser width
+if (sidenav.style.minWidth) {
+  sidenav.style.minWidth = Math.min(parseInt(sidenav.style.minWidth), document.documentElement.clientWidth) + 'px';
+}
