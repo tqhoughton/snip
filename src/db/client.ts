@@ -19,6 +19,7 @@ const initializeDbConnection = async () => {
   const signer = new DsqlSigner({
     hostname: clusterEndpoint,
     region,
+    expiresIn: 60 * 60 // 1hr
   });
 
   const token = await signer.getDbConnectAdminAuthToken();
@@ -34,9 +35,7 @@ const initializeDbConnection = async () => {
 
   await client.connect();
 
-  const db = drizzle(client, { schema: { snippet } });
-
-  return db;
+  return drizzle(client, { schema: { snippet } });
 };
 
 const db = initializeDbConnection();
