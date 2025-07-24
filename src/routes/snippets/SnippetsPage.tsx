@@ -5,13 +5,14 @@ import type { Request } from "src/utils/request";
 
 export interface Props {
   req: Request;
-  path?: string;
+  fullPath?: string;
 }
 
-export const SnippetsPage = async ({ req, path }: Props) => {
+export const SnippetsPage = async ({ req, fullPath }: Props) => {
   assert(req.oidc.user);
 
-  const snippet = path && (await getSnippetByPath(req.oidc.user.sub, path));
+  const snippet =
+    fullPath && (await getSnippetByPath(req.oidc.user.sub, fullPath));
 
   return (
     <main class="font-['VT323'] w-full bg-black text-green-400 text-xl grow flex items-stretch">
@@ -35,6 +36,7 @@ export const SnippetsPage = async ({ req, path }: Props) => {
               <button
                 hx-confirm="Are you sure you want to delete this snippet? This cannot be undone."
                 hx-delete={`/snips/${snippet.id}`}
+                hx-target="main"
                 class="cursor-pointer text-green-400 hover:text-red-400 hover:underline"
               >
                 Delete

@@ -42,7 +42,7 @@ export const SnippetMenu = async ({ req }: Props) => {
           end
         </script> */}
         {/* for now, use a javascript based resize.js script */}
-        <script src="/public/scripts/resize.js" />
+        <script defer src="/public/scripts/resize.js" />
       </div>
       <nav class="p-4">
         <ul>

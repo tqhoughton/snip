@@ -48,6 +48,7 @@
     "express": "^5.1.0",
     "express-openid-connect": "^2.18.1",
     "feather-icons": "^4.29.2",
+    "http-errors": "^2.0.0",
     "pg": "^8.16.3",
     "tailwindcss": "^4.1.11",
     "winston": "^3.17.0",

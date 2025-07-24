@@ -6,7 +6,7 @@ import assert from "assert";
 // schema imports
 import { snippet } from "./schema";
 
-export const getDrizzleClient = async () => {
+const initializeDbConnection = async () => {
   const endpoint = process.env.DSQL_CLUSTER_ID;
   const region = process.env.AWS_REGION;
 
@@ -34,5 +34,13 @@ export const getDrizzleClient = async () => {
 
   await client.connect();
 
-  return drizzle(client, { schema: { snippet } });
+  const db = drizzle(client, { schema: { snippet } });
+
+  return db;
+};
+
+const db = initializeDbConnection();
+
+export const getDrizzleClient = async () => {
+  return await db;
 };

@@ -8,7 +8,7 @@ export const HeaderBar = ({ isLoggedIn }: Props) => {
   return (
     <header class="w-full p-4 bg-black text-green-400 font-mono text-xl border-2 border-green-400 flex items-center justify-between">
       <a href="/">
-        <h1 class="text-lg md:text-3xl font-['VT323'] uppercase">Snip</h1>
+        <h1 class="text-4xl font-['VT323'] uppercase leading-none">Snip</h1>
       </a>
       <nav class="ml-3 font-mono">
         <ul class="flex items-center space-x-8">

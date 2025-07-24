@@ -6,8 +6,14 @@ import { SnippetsPage } from "./SnippetsPage";
 import { NewPage } from "./NewPage";
 import z from "zod";
 import assert from "assert";
-import { createSnippet, deleteSnippet } from "./queries";
-import type { Request } from "src/utils/request";
+import {
+  createSnippet,
+  deleteSnippet,
+  getSnippetById,
+  updateSnippet,
+} from "./queries";
+import { EditPage } from "./EditPage";
+import { ValidationError } from "src/utils/errors";
 
 const router = express.Router();
 
@@ -37,10 +43,17 @@ router.get("/", async (req, res) => {
 router.get(
   "/*fullPath",
   async (req: express.Request<{ fullPath: string[] }>, res) => {
-    // express does not type greedy params by default
+    const fullPath = req.params.fullPath.join("/");
+    const isEditMode = req.query.mode === "edit";
+    const component = isEditMode ? (
+      <EditPage req={req} fullPath={fullPath} />
+    ) : (
+      <SnippetsPage req={req} fullPath={fullPath} />
+    );
+
     renderToStream((rid) => (
       <Layout rid={rid} title="My Snips" req={req}>
-        <SnippetsPage req={req} path={req.params.fullPath.join("/")} />
+        {component}
       </Layout>
     )).pipe(res);
   },
@@ -57,13 +70,48 @@ router.post("/", async (req, res) => {
   assert(req.oidc.user);
   const input = snippetInput.parse(req.body);
 
-  const snippet = await createSnippet({
-    ...input,
-    language: "markdown",
-    author: req.oidc.user.sub,
-  });
+  try {
+    const snippet = await createSnippet({
+      ...input,
+      language: "markdown",
+      author: req.oidc.user.sub,
+    });
 
-  res.setHeader("HX-Redirect", `/snips/${snippet.fullPath}`).send();
+    res.setHeader("HX-Redirect", `/snips/${snippet.fullPath}`).send();
+  } catch (err) {
+    if (!(err instanceof ValidationError)) throw err;
+
+    renderToStream(() => (
+      <NewPage req={req} init={{ error: err, values: input }} />
+    )).pipe(res);
+  }
+});
+
+router.put("/:snipId", async (req, res) => {
+  assert(req.oidc.user);
+  const input = snippetInput.parse(req.body);
+
+  try {
+    const snippet = await updateSnippet({
+      id: req.params.snipId,
+      author: req.oidc.user.sub,
+      ...input,
+    });
+
+    res.setHeader("HX-Redirect", `/snips/${snippet.fullPath}`).send();
+  } catch (err) {
+    assert(req.oidc.user);
+    if (!(err instanceof ValidationError)) throw err;
+    const snippet = await getSnippetById(req.oidc.user.sub, req.params.snipId);
+
+    renderToStream(() => (
+      <EditPage
+        fullPath={snippet.fullPath}
+        req={req}
+        init={{ error: err, values: input }}
+      />
+    )).pipe(res);
+  }
 });
 
 export default router;

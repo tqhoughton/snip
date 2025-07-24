@@ -12,6 +12,8 @@ import { Layout } from "./common/Layout";
 import { ErrorPage } from "./common/ErrorPage";
 import { renderToStream } from "@kitajs/html/suspense";
 import { NotFoundPage } from "./common/NotFoundPage";
+import { isHttpError } from "http-errors";
+import { ValidationError } from "./utils/errors";
 
 const app = express();
 const port = process.env["PORT"] || 8080;
@@ -65,8 +67,13 @@ app.use((req, res) => {
 });
 
 const errorHandler: () => ErrorRequestHandler =
-  () => (error, req, res, _next) => {
+  () => (error: Error, req, res, _next) => {
     logger.error({ error, msg: "encountered error in error handler" });
+
+    // do not expose internal errors to the user
+    if (!isHttpError(error) || !(error instanceof ValidationError)) {
+      error = new Error("Internal Server Error");
+    }
 
     const component = (rid: string | number) =>
       req.method === "GET" ? (
