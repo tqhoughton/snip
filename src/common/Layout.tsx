@@ -74,9 +74,7 @@ export const Layout = ({
               <HeaderBar isLoggedIn={req.oidc.isAuthenticated()} />
             )}
             <Suspense rid={rid} fallback={<Loading />}>
-              <ErrorBoundary>
-                {children}
-              </ErrorBoundary>
+              <ErrorBoundary>{children}</ErrorBoundary>
             </Suspense>
             <FooterBar />
           </ErrorBoundary>
