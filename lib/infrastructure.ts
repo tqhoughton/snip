@@ -19,10 +19,6 @@ export class SnipStack extends cdk.Stack {
       name: "snip-db",
     });
 
-    // TODO: remove
-    console.log(db.cluster.attrIdentifier);
-    console.log(db.cluster.attrResourceArn);
-
     const schemaManager = new SchemaManagerLambda(this, "SchemaManager", {
       name: "snip-db-schema-manager",
       clusterArn: db.cluster.attrResourceArn,
