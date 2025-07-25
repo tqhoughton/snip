@@ -17,10 +17,12 @@ Unfortunately Drizzle does not support [DSQL for their drizzle-kit migration sys
 
 In `src/migrations` is a list of SQL files that the schemaManager function will bundle and attempt to execute. NOTE: only one SQL command per file is allowed or you may get some cryptic SQL errors back.
 
-## TODO
+## Future Work
 
 ### MVP
-- [ ] Add easy method for copying snips
+
+- [ ] add back/cancel button on edit form
 
 ### Nice-to-haves
-- [ ] Code syntax highlighting
+
+- [ ] syntax highlighting on <code> elements

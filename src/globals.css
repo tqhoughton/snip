@@ -10,6 +10,12 @@
 
     clip-path: inset(0 3ch 0 0);
   }
+  .code-wrapper {
+    @apply relative;
+  }
+  .copy-button {
+    @apply cursor-pointer absolute bottom-2 right-2 text-slate-300 hover:text-white transition-all p-1 z-10;
+  }
 }
 
 @theme {

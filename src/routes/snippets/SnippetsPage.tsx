@@ -2,10 +2,11 @@ import assert from "assert";
 import { NotFound } from "http-errors";
 import { escapeHtml } from "@kitajs/html";
 import DOMPurify from "isomorphic-dompurify";
+import feather from "feather-icons";
 
+import type { Request } from "src/utils/request";
 import { logger } from "src/utils/logger";
 import { getSnippetByPath } from "./queries";
-import type { Request } from "src/utils/request";
 import { SnippetMenu } from "./SnippetMenu";
 import { Main } from "./Main";
 
@@ -37,6 +38,8 @@ export const SnippetsPage = async ({ req, fullPath }: Props) => {
     case "markdown": {
       const marked = await import("marked");
 
+      const renderer = new marked.Renderer();
+
       marked.use({
         renderer: {
           link({ tokens, href, title }) {
@@ -53,13 +56,20 @@ export const SnippetsPage = async ({ req, fullPath }: Props) => {
 
             // support custom heading IDs
             // e.g. {#my-heading-id} in the markdown text
-            const headingId = text.match(/\{#(.*)\}/)?.[1] || text.toLowerCase().replace(/[^\w]+/g, "-");
+            const headingId =
+              text.match(/\{#(.*)\}/)?.[1] ||
+              text.toLowerCase().replace(/[^\w]+/g, "-");
             const textWithoutId = text.replace(/\{#.*\}/, "").trim();
 
             return `
             <h${depth} id="md-${headingId}">
               ${textWithoutId}
             </h${depth}>`;
+          },
+          code(...args) {
+            const text = renderer.code(...args);
+            logger.info({ text });
+            return `<div class="code-wrapper">${text}<button class="copy-button">${feather.icons.clipboard.toSvg()}</button></div>`;
           },
         },
       });
@@ -111,6 +121,15 @@ export const SnippetsPage = async ({ req, fullPath }: Props) => {
           </div>
           <article class="prose prose-slate prose-invert max-w-max p-6 bg-slate-800 border border-green-400 break-words">
             {content}
+            {/* prettier-ignore */}
+            <script type="text/hyperscript">
+              on click from .copy-button
+                set button to it
+                get its parentElement
+                set codeText to its innerText
+                call navigator.clipboard.writeText(codeText)
+                set button.innerHTML to "Copied!"
+            </script>
           </article>
         </section>
       )}

@@ -40,7 +40,7 @@ export class HttpService extends Construct {
         ),
       ],
       bundling: {
-        nodeModules: ['jsdom'],
+        nodeModules: ["jsdom"],
         // needed for dsql adapter
         bundleAwsSDK: true,
         commandHooks: {
