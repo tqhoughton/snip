@@ -49,11 +49,16 @@ export const SnippetsPage = async ({ req, fullPath }: Props) => {
           // make sure that headers ids are consistent with generated links
           heading({ tokens, depth }) {
             const text = this.parser.parseInline(tokens);
-            const escapedText = text.toLowerCase().replace(/[^\w]+/g, "-");
+            logger.info({ text, depth });
+
+            // support custom heading IDs
+            // e.g. {#my-heading-id} in the markdown text
+            const headingId = text.match(/\{#(.*)\}/)?.[1] || text.toLowerCase().replace(/[^\w]+/g, "-");
+            const textWithoutId = text.replace(/\{#.*\}/, "").trim();
 
             return `
-            <h${depth} id="md-${escapedText}">
-              ${text}
+            <h${depth} id="md-${headingId}">
+              ${textWithoutId}
             </h${depth}>`;
           },
         },
