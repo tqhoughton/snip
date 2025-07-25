@@ -20,7 +20,7 @@ In `src/migrations` is a list of SQL files that the schemaManager function will 
 ## TODO
 
 ### MVP
-[] - Add easy method for copying snips
+[ ] - Add easy method for copying snips
 
 ### Nice-to-haves
-[] - Code syntax highlighting
+[ ] - Code syntax highlighting
