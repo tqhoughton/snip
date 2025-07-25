@@ -104,7 +104,7 @@ export const SnippetsPage = async ({ req, fullPath }: Props) => {
               </button>
             </div>
           </div>
-          <article class="prose prose-slate prose-invert max-w-max bg-slate-800 p-4 border border-green-400 break-words">
+          <article class="prose prose-slate prose-invert max-w-max p-6 bg-slate-800 border border-green-400 break-words">
             {content}
           </article>
         </section>
