@@ -26,4 +26,4 @@ In `src/migrations` is a list of SQL files that the schemaManager function will 
 
 ### Nice-to-haves
 
-- [ ] syntax highlighting on <code> elements
+- [ ] syntax highlighting on code blocks
