@@ -46,7 +46,7 @@ export const SnippetsPage = async ({ req, fullPath }: Props) => {
             href = isInternalLink ? `#md-${href.slice(1)}` : href;
             return `<a href="${href}">${text}</a>`;
           },
-          // make sure that headers get anchor links
+          // make sure that headers ids are consistent with generated links
           heading({ tokens, depth }) {
             const text = this.parser.parseInline(tokens);
             const escapedText = text.toLowerCase().replace(/[^\w]+/g, "-");
