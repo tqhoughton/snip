@@ -16,3 +16,11 @@ CDK project for a basic HTMX application using Aurora DSQL as the primary data s
 Unfortunately Drizzle does not support [DSQL for their drizzle-kit migration system](https://github.com/drizzle-team/drizzle-orm/issues/1267#issuecomment-2530875854) so this project has a bespoke method for running migrations.
 
 In `src/migrations` is a list of SQL files that the schemaManager function will bundle and attempt to execute. NOTE: only one SQL command per file is allowed or you may get some cryptic SQL errors back.
+
+## TODO
+
+### MVP
+[] - Add easy method for copying snips
+
+### Nice-to-haves
+[] - Code syntax highlighting
