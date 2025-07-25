@@ -1,10 +1,13 @@
 import assert from "assert";
+import { NotFound } from "http-errors";
+
+import type { Request } from "src/utils/request";
+import { ValidationError } from "src/utils/errors";
+
 import { SnippetForm } from "./SnippetForm";
 import { SnippetMenu } from "./SnippetMenu";
-import type { Request } from "src/utils/request";
 import { getSnippetByPath } from "./queries";
-import { NotFound } from "http-errors";
-import { ValidationError } from "src/utils/errors";
+import { Main } from "./Main";
 
 export interface Props {
   fullPath: string;
@@ -26,7 +29,7 @@ export const EditPage = async ({ req, fullPath, init }: Props) => {
   assert(snippet, new NotFound(`Snippet with path "${fullPath}" not found.`));
 
   return (
-    <main class="w-full bg-black text-green-400 text-xl grow flex items-stretch">
+    <Main>
       <SnippetMenu req={req} />
       <section class="grow p-8 pt-4">
         <SnippetForm
@@ -40,6 +43,6 @@ export const EditPage = async ({ req, fullPath, init }: Props) => {
           }
         />
       </section>
-    </main>
+    </Main>
   );
 };

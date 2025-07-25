@@ -1,5 +1,4 @@
 import { PropsWithChildren } from "@kitajs/html";
-import { ErrorBoundary } from "@kitajs/html/error-boundary";
 import { Suspense } from "@kitajs/html/suspense";
 import type { Request } from "src/utils/request";
 
@@ -7,6 +6,7 @@ import { ErrorPage } from "./ErrorPage";
 import { HeaderBar } from "./HeaderBar";
 import { FooterBar } from "./FooterBar";
 import { Loading } from "./Loading";
+import { ErrorBoundary } from "./ErrorBoundary";
 
 export interface Props extends PropsWithChildren {
   rid: string | number;
@@ -69,16 +69,14 @@ export const Layout = ({
           <script src="https://unpkg.com/hyperscript.org@0.9.14"></script>
         </head>
         <body class="bg-black flex flex-col min-h-full grow items-center justify-center">
-          <ErrorBoundary
-            catch={(err) => (
-              <ErrorPage error={err instanceof Error ? err : new Error()} />
-            )}
-          >
+          <ErrorBoundary>
             {showHeader && (
               <HeaderBar isLoggedIn={req.oidc.isAuthenticated()} />
             )}
             <Suspense rid={rid} fallback={<Loading />}>
-              {children}
+              <ErrorBoundary>
+                {children}
+              </ErrorBoundary>
             </Suspense>
             <FooterBar />
           </ErrorBoundary>

@@ -24,24 +24,6 @@ export const SnippetMenu = async ({ req }: Props) => {
         id="nav-border"
         class="absolute top-0 -right-[7px] bottom-0 w-3 cursor-col-resize"
       >
-        {/* PROBLEM: cannot figure out how to make each event register only register if needed and orchestrate cleanup */}
-        {/* TODO: figure out how to make this deregister event listeners automatically */}
-        {/* <script type="text/hyperscript">
-          on mousedown from #nav-border
-            halt the event's default
-            set global isResizing to true
-          on mousemove from document
-            if isResizing
-              set containerRect to my.getBoundingClientRect()
-              set newWidth to event.clientX - containerRect.left
-              set *width of #nav to newWidth + "px"
-            end
-          end
-          on mouseup from document
-            set global isResizing to false
-          end
-        </script> */}
-        {/* for now, use a javascript based resize.js script */}
         <script defer src="/public/scripts/resize.js" />
       </div>
       <nav class="p-4">

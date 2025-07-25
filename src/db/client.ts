@@ -19,7 +19,7 @@ const initializeDbConnection = async () => {
   const signer = new DsqlSigner({
     hostname: clusterEndpoint,
     region,
-    expiresIn: 60 * 60 // 1hr
+    expiresIn: 60 * 60, // 1hr
   });
 
   const token = await signer.getDbConnectAdminAuthToken();

@@ -2,6 +2,8 @@ import { SnippetMenu } from "./SnippetMenu";
 import assert from "assert";
 import { getSnippetByPath } from "./queries";
 import type { Request } from "src/utils/request";
+import { NotFound } from "http-errors";
+import { Main } from "./Main";
 
 export interface Props {
   req: Request;
@@ -11,11 +13,34 @@ export interface Props {
 export const SnippetsPage = async ({ req, fullPath }: Props) => {
   assert(req.oidc.user);
 
-  const snippet =
-    fullPath && (await getSnippetByPath(req.oidc.user.sub, fullPath));
+  if (!fullPath) {
+    return (
+      <Main>
+        <SnippetMenu req={req} />
+        <section class="grow p-4 flex items-center justify-center">
+          <p>Select a snip on the left to open it in this panel.</p>
+        </section>
+      </Main>
+    );
+  }
+
+  const snippet = await getSnippetByPath(req.oidc.user.sub, fullPath);
+  assert(snippet, new NotFound(`Snippet with path "${fullPath}" not found.`));
+
+  let content: string;
+
+  switch (snippet.language) {
+    case "markdown": {
+      content = snippet.content;
+      break;
+    }
+    default: {
+      content = snippet.content;
+    }
+  }
 
   return (
-    <main class="font-['VT323'] w-full bg-black text-green-400 text-xl grow flex items-stretch">
+    <Main>
       <SnippetMenu req={req} />
       {!snippet && (
         <section class="grow p-4 flex items-center justify-center">
@@ -48,6 +73,6 @@ export const SnippetsPage = async ({ req, fullPath }: Props) => {
           </pre>
         </section>
       )}
-    </main>
+    </Main>
   );
 };
