@@ -44,7 +44,6 @@ export const SnippetsPage = async ({ req, fullPath }: Props) => {
         renderer: {
           link({ tokens, href, title }) {
             const text = this.parser.parseInline(tokens);
-            logger.info({ href, title, text });
             const isInternalLink = href.startsWith("#");
             href = isInternalLink ? `#md-${href.slice(1)}` : href;
             return `<a href="${href}">${text}</a>`;
@@ -52,7 +51,6 @@ export const SnippetsPage = async ({ req, fullPath }: Props) => {
           // make sure that headers ids are consistent with generated links
           heading({ tokens, depth }) {
             const text = this.parser.parseInline(tokens);
-            logger.info({ text, depth });
 
             // support custom heading IDs
             // e.g. {#my-heading-id} in the markdown text
@@ -68,7 +66,6 @@ export const SnippetsPage = async ({ req, fullPath }: Props) => {
           },
           code(...args) {
             const text = renderer.code(...args);
-            logger.info({ text });
             return `<div class="code-wrapper">${text}<button class="copy-button">${feather.icons.clipboard.toSvg()}</button></div>`;
           },
         },

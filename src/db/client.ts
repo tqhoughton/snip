@@ -6,6 +6,10 @@ import assert from "assert";
 // schema imports
 import { snippet } from "./schema";
 
+const TOKEN_DURATION_SECONDS = 60 * 60; // 1 hour
+
+let adminTokenExpiresAt: number;
+
 const initializeDbConnection = async () => {
   const endpoint = process.env.DSQL_CLUSTER_ID;
   const region = process.env.AWS_REGION;
@@ -19,9 +23,10 @@ const initializeDbConnection = async () => {
   const signer = new DsqlSigner({
     hostname: clusterEndpoint,
     region,
-    expiresIn: 60 * 60, // 1hr
+    expiresIn: TOKEN_DURATION_SECONDS,
   });
 
+  adminTokenExpiresAt = Date.now() + TOKEN_DURATION_SECONDS * 1000;
   const token = await signer.getDbConnectAdminAuthToken();
 
   const client = new Client({
@@ -38,8 +43,12 @@ const initializeDbConnection = async () => {
   return drizzle(client, { schema: { snippet } });
 };
 
-const db = initializeDbConnection();
+let db = initializeDbConnection();
 
 export const getDrizzleClient = async () => {
+  if (Date.now() > adminTokenExpiresAt) {
+    // db auth token has expired, reinitialize the connection
+    db = initializeDbConnection();
+  }
   return await db;
 };
