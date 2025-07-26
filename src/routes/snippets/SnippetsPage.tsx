@@ -46,7 +46,7 @@ export const SnippetsPage = async ({ req, fullPath }: Props) => {
             const text = this.parser.parseInline(tokens);
             const isInternalLink = href.startsWith("#");
             href = isInternalLink ? `#md-${href.slice(1)}` : href;
-            return `<a href="${href}">${text}</a>`;
+            return `<a class="md-link-${isInternalLink ? "internal" : "external"}" href="${href}">${text}</a>`;
           },
           // make sure that headers ids are consistent with generated links
           heading({ tokens, depth }) {
@@ -126,6 +126,14 @@ export const SnippetsPage = async ({ req, fullPath }: Props) => {
                 set codeText to its innerText
                 call navigator.clipboard.writeText(codeText)
                 set button.innerHTML to "Copied!"
+            </script>
+            {/* prettier-ignore */}
+            <script type="text/hyperscript">
+              on load
+                for a in {"<a.md-link-external/>"}
+                  set a.target to "_blank"
+                  set a.rel to "noopener noreferrer"
+                end
             </script>
           </article>
         </section>

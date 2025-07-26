@@ -60,11 +60,26 @@ export const Layout = ({
             href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
             rel="stylesheet"
           />
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/a11y-dark.min.css" />
+          <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/a11y-dark.min.css"
+          />
           <link rel="stylesheet" href="/public/styles/tailwind.css" />
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/htmx/2.0.6/htmx.min.js" integrity="sha512-fzOjdYXF0WrjlPAGWmlpHv2PnJ1m7yP8QdWj1ORoM7Bc4xmKcDRBOXSOZ4Wedia0mjtGzXQX1f1Ah1HDHAWywg==" crossorigin="anonymous" />
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/hyperscript/0.9.14/_hyperscript.min.js" integrity="sha512-l43sZzpnAddmYhJyfPrgv46XhJvA95gsA28/+eW4XZLSekQ8wlP68i9f22KGkRjY0HNiZrLc5MXGo4z/tM2QNA==" crossorigin="anonymous" />
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js" integrity="sha512-EBLzUL8XLl+va/zAsmXwS7Z2B1F9HUHkZwyS/VKwh3S7T/U0nF4BaU29EP/ZSf6zgiIxYAnKLu6bJ8dqpmX5uw==" crossorigin="anonymous" />
+          <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/htmx/2.0.6/htmx.min.js"
+            integrity="sha512-fzOjdYXF0WrjlPAGWmlpHv2PnJ1m7yP8QdWj1ORoM7Bc4xmKcDRBOXSOZ4Wedia0mjtGzXQX1f1Ah1HDHAWywg=="
+            crossorigin="anonymous"
+          />
+          <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/hyperscript/0.9.14/_hyperscript.min.js"
+            integrity="sha512-l43sZzpnAddmYhJyfPrgv46XhJvA95gsA28/+eW4XZLSekQ8wlP68i9f22KGkRjY0HNiZrLc5MXGo4z/tM2QNA=="
+            crossorigin="anonymous"
+          />
+          <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"
+            integrity="sha512-EBLzUL8XLl+va/zAsmXwS7Z2B1F9HUHkZwyS/VKwh3S7T/U0nF4BaU29EP/ZSf6zgiIxYAnKLu6bJ8dqpmX5uw=="
+            crossorigin="anonymous"
+          />
           <script>hljs.highlightAll();</script>
         </head>
         <body class="bg-black flex flex-col min-h-full grow items-center justify-center">

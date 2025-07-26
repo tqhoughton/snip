@@ -115,6 +115,17 @@ export const SettingsPage = () => {
           <li>
             <a
               href="
+https://highlightjs.org"
+              target="_blank"
+              class="underline"
+              title="highlightjs.org"
+            >
+              Highlight.js
+            </a>
+          </li>
+          <li>
+            <a
+              href="
 https://dompurify.js.org"
               target="_blank"
               class="underline"
