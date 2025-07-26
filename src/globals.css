@@ -41,3 +41,9 @@
 [data-sf] {
   display: contents;
 }
+
+/* override highlight.js styles */
+pre code.hljs {
+  background: none;
+  padding: 0;
+}
