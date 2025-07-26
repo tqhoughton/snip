@@ -19,10 +19,6 @@ In `src/migrations` is a list of SQL files that the schemaManager function will 
 
 ## Future Work
 
-### MVP
-
-- [ ] delete account flow
-
 ### Nice-to-haves
 
 - [ ] syntax highlighting on code blocks

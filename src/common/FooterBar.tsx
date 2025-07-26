@@ -4,9 +4,25 @@ export const FooterBar = () => {
       <nav class="font-['VT323'] text-xl flex items-center space-x-2 md:space-x-8">
         <span>&copy; 2025 Turner Houghton</span>
         <span>
+          Code hosted on{" "}
+          <a
+            class="underline"
+            target="_blank"
+            title="github.com"
+            href="https://github.com/tqhoughton/snip"
+          >
+            GitHub
+          </a>
+        </span>
+        <span>
           {" "}
           🦬 Powered by{" "}
-          <a class="underline" target="_blank" href="https://htmx.org">
+          <a
+            class="underline"
+            target="_blank"
+            title="htmx.org"
+            href="https://htmx.org"
+          >
             HTMX
           </a>
         </span>
