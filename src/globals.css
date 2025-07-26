@@ -14,7 +14,7 @@
     @apply relative;
   }
   .copy-button {
-    @apply cursor-pointer absolute bottom-2 right-2 text-slate-300 hover:text-white transition-all p-1 z-10;
+    @apply not-italic cursor-pointer absolute bottom-2 right-2 text-slate-300 hover:text-white transition-all p-1 z-10;
   }
 }
 

@@ -8,8 +8,7 @@ export const Home = () => {
           favorite code snippets easier.
         </p>
         <p class="mt-4">
-          Click on <span class="uppercase">"sign in"</span> to get started
-          today!
+          Click on <span class="uppercase">"sign in"</span> to get started!
         </p>
       </section>
     </main>

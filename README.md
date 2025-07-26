@@ -21,7 +21,6 @@ In `src/migrations` is a list of SQL files that the schemaManager function will 
 
 ### MVP
 
-- [ ] add back/cancel button on edit form
 - [ ] delete account flow
 
 ### Nice-to-haves

@@ -1,4 +1,3 @@
-import { logger } from "src/utils/logger";
 import feather from "feather-icons";
 import { ValidationError } from "src/utils/errors";
 import clsx from "clsx";
@@ -16,6 +15,7 @@ export const SnippetForm = ({ id, initialValues, error }: Props) => {
   const isFullPathError = error?.fields.find(
     (field) => field.name === "fullPath",
   );
+
   return (
     <form
       {...(id ? { "hx-put": `/snips/${id}` } : { "hx-post": "/snips" })}
@@ -67,13 +67,24 @@ export const SnippetForm = ({ id, initialValues, error }: Props) => {
           </textarea>
         </label>
       </div>
-      <button
-        type="submit"
-        class="cursor-pointer text-xl font-mono bg-green-400 text-black font-bold py-2 px-4 hover:bg-black border-2 hover:text-blue-500 hover:border-blue-500 transition-all flex space-x-2"
-      >
-        <span class="mt-0.5">{feather.icons.save.toSvg()}</span>
-        <span>{id ? "Update" : "Create"}</span>
-      </button>
+      <div class="flex space-x-4">
+        <button
+          type="submit"
+          class="cursor-pointer text-xl font-mono bg-green-400 text-black font-bold py-2 px-4 hover:bg-black border-2 hover:text-blue-500 hover:border-blue-500 transition-all flex space-x-2"
+        >
+          <span class="mt-0.5">{feather.icons.save.toSvg()}</span>
+          <span>{id ? "Update" : "Create"}</span>
+        </button>
+        {initialValues?.fullPath && (
+          <a
+            href={`/snips/${initialValues.fullPath}`}
+            class="cursor-pointer text-xl font-mono bg-slate-400 text-black font-bold py-2 px-4 hover:bg-black border-2 hover:text-blue-500 hover:border-blue-500 transition-all flex space-x-2"
+          >
+            <span class="mt-0.5">{feather.icons.x.toSvg()}</span>
+            <span>Cancel</span>
+          </a>
+        )}
+      </div>
     </form>
   );
 };

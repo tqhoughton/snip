@@ -33,13 +33,11 @@ export const HeaderBar = ({ isLoggedIn }: Props) => {
                 </a>
               </li>
               <li>
-                <a href="/logout">
-                  <button
-                    role="link"
-                    class="cursor-pointer mt-1.5 [&>svg]:size-5 md:[&>svg]:size-6"
-                  >
-                    {feather.icons["log-out"].toSvg()}
-                  </button>
+                <a
+                  href="/logout"
+                  class="cursor-pointer mt-1.5 [&>svg]:size-5 md:[&>svg]:size-6"
+                >
+                  {feather.icons["log-out"].toSvg()}
                 </a>
               </li>
             </>

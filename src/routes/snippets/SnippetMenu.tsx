@@ -29,14 +29,12 @@ export const SnippetMenu = async ({ req }: Props) => {
       <nav class="p-4">
         <ul>
           <li>
-            <a href="/snips/new" class="lowercase text-xl">
-              <button
-                role="link"
-                class="bg-green-400 border-2 p-2 text-black w-full cursor-pointer flex align-center justify-center hover:text-green-400 hover:bg-black transition-all"
-              >
-                <div class="mr-2 mt-0.5">{icons["plus-square"].toSvg()}</div>
-                Create Snip
-              </button>
+            <a
+              href="/snips/new"
+              class="lowercase text-xl bg-green-400 border-2 p-2 text-black w-full cursor-pointer flex align-center justify-center hover:text-green-400 hover:bg-black transition-all"
+            >
+              <div class="mr-2 mt-0.5">{icons["plus-square"].toSvg()}</div>
+              Create Snip
             </a>
           </li>
           <hr class="border-none mb-4" />
