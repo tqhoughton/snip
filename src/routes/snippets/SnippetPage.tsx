@@ -126,15 +126,15 @@ export const SnippetsPage = async ({ req, fullPath }: Props) => {
               set codeText to its innerText
               call navigator.clipboard.writeText(codeText)
               set button.innerHTML to "Copied!"
-          </script>
+            </script>
             {/* prettier-ignore */}
             <script type="text/hyperscript">
-            on load
-              for a in {`<a.md-link-external[href^="http"]/>`}
-                set a.target to "_blank"
-                set a.rel to "noopener noreferrer"
-              end
-          </script>
+              on load
+                for a in {`<a.md-link-external[href^="http"]/>`}
+                  set a.target to "_blank"
+                  set a.rel to "noopener noreferrer"
+                end
+            </script>
           </article>
         )}
       </section>
