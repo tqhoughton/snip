@@ -87,7 +87,7 @@ export const SnippetsPage = async ({ req, fullPath }: Props) => {
   return (
     <Main>
       <SnippetMenu req={req} />
-      <section class="grow p-8 pt-6 overflow-x-scroll flex flex-col">
+      <section class="grow p-8 pt-6 overflow-x-auto flex flex-col">
         <div class="flex flex-wrap items-center mb-4">
           <h2 class="font-['VT323'] text-3xl pr-4 mr-auto">
             {snippet.fullPath}
