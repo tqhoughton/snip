@@ -87,7 +87,7 @@ export const SnippetsPage = async ({ req, fullPath }: Props) => {
   return (
     <Main>
       <SnippetMenu req={req} />
-      <section class="grow p-8 pt-6 overflow-x-scroll">
+      <section class="grow p-8 pt-6 overflow-x-scroll flex flex-col">
         <div class="flex flex-wrap items-center mb-4">
           <h2 class="font-['VT323'] text-3xl pr-4 mr-auto">
             {snippet.fullPath}
@@ -110,12 +110,18 @@ export const SnippetsPage = async ({ req, fullPath }: Props) => {
             </button>
           </div>
         </div>
-        <article class="prose prose-slate prose-invert max-w-max p-6 bg-slate-800 border border-green-400 break-words">
-          {content}
-          {/* prettier-ignore */}
-          <script type="text/hyperscript">
-            on click from .copy-button
-              set button to it
+        {!content && (
+          <div class="grow max-h-60 font-mono text-red-400 flex items-center justify-center">
+            <p>Snip content is empty or not supported.</p>
+          </div>
+        )}
+        {content && (
+          <article class="prose prose-slate prose-invert max-w-max p-6 bg-slate-800 border border-green-400 break-words">
+            {content}
+            {/* prettier-ignore */}
+            <script type="text/hyperscript">
+              on click from .copy-button
+                set button to it
               get its parentElement
               set codeText to its innerText
               call navigator.clipboard.writeText(codeText)
@@ -130,6 +136,7 @@ export const SnippetsPage = async ({ req, fullPath }: Props) => {
               end
           </script>
         </article>
+        )}
       </section>
     </Main>
   );
