@@ -130,7 +130,8 @@ export const SnippetsPage = async ({ req, fullPath }: Props) => {
           {/* prettier-ignore */}
           <script type="text/hyperscript">
             on load
-              for a in {"<a.md-link-external/>"}
+              for a in {`<a.md-link-external[href^="http"]/>`}
+                log a.href
                 set a.target to "_blank"
                 set a.rel to "noopener noreferrer"
               end
