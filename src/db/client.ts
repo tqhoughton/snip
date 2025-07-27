@@ -43,7 +43,7 @@ const initializeDbConnection = async () => {
   return drizzle(client, { schema: { snippet } });
 };
 
-let db: ReturnType <typeof initializeDbConnection> | undefined;
+let db: ReturnType<typeof initializeDbConnection> | undefined;
 
 export const getDrizzleClient = async () => {
   if (!db || Date.now() > adminTokenExpiresAt) {

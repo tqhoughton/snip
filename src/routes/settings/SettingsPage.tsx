@@ -15,6 +15,7 @@ export const SettingsPage = () => {
             hx-confirm="Are you sure you want to delete your account? This action cannot be undone."
             hx-delete="/settings/account"
             class="text-red-400 underline cursor-pointer"
+            title="Delete account"
           >
             here
           </button>{" "}

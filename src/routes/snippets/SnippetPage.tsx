@@ -65,7 +65,7 @@ export const SnippetsPage = async ({ req, fullPath }: Props) => {
           },
           code(...args) {
             const text = renderer.code(...args);
-            return `<div class="code-wrapper">${text}<button class="copy-button">${feather.icons.clipboard.toSvg()}</button></div>`;
+            return `<div class="code-wrapper">${text}<button class="copy-button" title="Copy to clipboard">${feather.icons.clipboard.toSvg()}</button></div>`;
           },
         },
       });
@@ -103,6 +103,7 @@ export const SnippetsPage = async ({ req, fullPath }: Props) => {
               hx-confirm="Are you sure you want to delete this snippet? This cannot be undone."
               hx-delete={`/snips/${snippet.id}`}
               hx-target="main"
+              title="Delete"
               class="font-['VT323'] cursor-pointer text-green-400 hover:text-red-400 hover:underline"
             >
               Delete
