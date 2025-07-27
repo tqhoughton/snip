@@ -1,7 +1,8 @@
 // TODO: figure out if we can replace this with hyperscript
-console.log("resize.js script loaded");
+console.debug("resize.js script loaded");
 
 function init() {
+  console.debug("init resize script");
   const sidenav = document.getElementById("nav");
   const resizer = document.getElementById("nav-border");
   const minSideNavWidthPx = 238;
