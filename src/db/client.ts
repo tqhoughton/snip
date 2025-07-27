@@ -45,8 +45,8 @@ const initializeDbConnection = async () => {
 
 let db = initializeDbConnection();
 
-export const getDrizzleClient = async () => {
-  if (Date.now() > adminTokenExpiresAt) {
+export const getDrizzleClient = async (reinit = true) => {
+  if (reinit && Date.now() > adminTokenExpiresAt) {
     // db auth token has expired, reinitialize the connection
     db = initializeDbConnection();
   }
