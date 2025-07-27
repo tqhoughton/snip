@@ -43,12 +43,20 @@ const initializeDbConnection = async () => {
   return drizzle(client, { schema: { snippet } });
 };
 
-let db = initializeDbConnection();
+let db: ReturnType <typeof initializeDbConnection> | undefined;
 
-export const getDrizzleClient = async (reinit = true) => {
-  if (reinit && Date.now() > adminTokenExpiresAt) {
+export const getDrizzleClient = async () => {
+  if (!db || Date.now() > adminTokenExpiresAt) {
     // db auth token has expired, reinitialize the connection
     db = initializeDbConnection();
   }
+
   return await db;
+};
+
+export const closeDbConnection = async () => {
+  if (db) {
+    await db.then((db) => db.$client.end());
+    db = undefined;
+  }
 };

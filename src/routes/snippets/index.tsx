@@ -1,19 +1,22 @@
 import express from "express";
 import { renderToStream } from "@kitajs/html/suspense";
-import { Layout } from "src/common/Layout";
 import { requiresAuth } from "express-openid-connect";
-import { SnippetsPage } from "./SnippetsPage";
-import { NewPage } from "./NewPage";
 import z from "zod";
 import assert from "assert";
+
+import { ValidationError } from "src/utils/errors";
+import { Layout } from "src/common/Layout";
+
+import { EditPage } from "./EditPage";
+import { SnippetsPage } from "./SnippetPage";
+import { NewPage } from "./NewPage";
+
 import {
   createSnippet,
   deleteSnippet,
   getSnippetById,
   updateSnippet,
 } from "./queries";
-import { EditPage } from "./EditPage";
-import { ValidationError } from "src/utils/errors";
 
 const router = express.Router();
 

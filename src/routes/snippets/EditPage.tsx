@@ -31,7 +31,7 @@ export const EditPage = async ({ req, fullPath, init }: Props) => {
   return (
     <Main>
       <SnippetMenu req={req} />
-      <section class="grow p-8 pt-4">
+      <section class="overflow-y-scroll p-8 pt-4">
         <SnippetForm
           id={snippet.id}
           error={init?.error}

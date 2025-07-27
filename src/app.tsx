@@ -14,7 +14,7 @@ import { renderToStream } from "@kitajs/html/suspense";
 import { NotFoundPage } from "./common/NotFoundPage";
 import { isHttpError } from "http-errors";
 import { ValidationError } from "./utils/errors";
-import { getDrizzleClient } from "./db/client";
+import { closeDbConnection } from "./db/client";
 
 const app = express();
 const port = process.env["PORT"] || 8080;
@@ -103,9 +103,7 @@ process.on("SIGTERM", async () => {
   logger.info("[express] SIGTERM received");
   logger.info("[express] cleaning up");
   // add any necessary cleanup here
-  await getDrizzleClient(false).then((db) => {
-    db.$client.end();
-  });
+  await closeDbConnection();
 
   logger.info("[express] exiting");
   process.exit(0);
