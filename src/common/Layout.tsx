@@ -2,7 +2,6 @@ import { PropsWithChildren } from "@kitajs/html";
 import { Suspense } from "@kitajs/html/suspense";
 import type { Request } from "src/utils/request";
 
-import { ErrorPage } from "./ErrorPage";
 import { HeaderBar } from "./HeaderBar";
 import { FooterBar } from "./FooterBar";
 import { Loading } from "./Loading";

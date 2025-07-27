@@ -87,56 +87,49 @@ export const SnippetsPage = async ({ req, fullPath }: Props) => {
   return (
     <Main>
       <SnippetMenu req={req} />
-      {!snippet && (
-        <section class="grow p-4 flex items-center justify-center">
-          <p>Select a snip on the left to open it in this panel.</p>
-        </section>
-      )}
-      {snippet && (
-        <section class="grow p-8 pt-6">
-          <div class="flex flex-wrap items-center mb-4">
-            <h2 class="font-['VT323'] text-3xl pr-4 mr-auto">
-              {snippet.fullPath}
-            </h2>
-            <div class="flex space-x-3">
-              <a
-                href={`/snips/${snippet.fullPath}?mode=edit`}
-                class="font-['VT323'] text-green-400 hover:text-yellow-300 hover:underline"
-              >
-                Edit
-              </a>
-              <button
-                hx-confirm="Are you sure you want to delete this snippet? This cannot be undone."
-                hx-delete={`/snips/${snippet.id}`}
-                hx-target="main"
-                class="font-['VT323'] cursor-pointer text-green-400 hover:text-red-400 hover:underline"
-              >
-                Delete
-              </button>
-            </div>
+      <section class="grow p-8 pt-6 overflow-x-scroll">
+        <div class="flex flex-wrap items-center mb-4">
+          <h2 class="font-['VT323'] text-3xl pr-4 mr-auto">
+            {snippet.fullPath}
+          </h2>
+          <div class="flex space-x-3">
+            <a
+              href={`/snips/${snippet.fullPath}?mode=edit`}
+              class="font-['VT323'] text-green-400 hover:text-yellow-300 hover:underline"
+            >
+              Edit
+            </a>
+            <button
+              hx-confirm="Are you sure you want to delete this snippet? This cannot be undone."
+              hx-delete={`/snips/${snippet.id}`}
+              hx-target="main"
+              class="font-['VT323'] cursor-pointer text-green-400 hover:text-red-400 hover:underline"
+            >
+              Delete
+            </button>
           </div>
-          <article class="prose prose-slate prose-invert max-w-max p-6 bg-slate-800 border border-green-400 break-words">
-            {content}
-            {/* prettier-ignore */}
-            <script type="text/hyperscript">
-              on click from .copy-button
-                set button to it
-                get its parentElement
-                set codeText to its innerText
-                call navigator.clipboard.writeText(codeText)
-                set button.innerHTML to "Copied!"
-            </script>
-            {/* prettier-ignore */}
-            <script type="text/hyperscript">
-              on load
-                for a in {"<a.md-link-external/>"}
-                  set a.target to "_blank"
-                  set a.rel to "noopener noreferrer"
-                end
-            </script>
-          </article>
-        </section>
-      )}
+        </div>
+        <article class="prose prose-slate prose-invert max-w-max p-6 bg-slate-800 border border-green-400 break-words">
+          {content}
+          {/* prettier-ignore */}
+          <script type="text/hyperscript">
+            on click from .copy-button
+              set button to it
+              get its parentElement
+              set codeText to its innerText
+              call navigator.clipboard.writeText(codeText)
+              set button.innerHTML to "Copied!"
+          </script>
+          {/* prettier-ignore */}
+          <script type="text/hyperscript">
+            on load
+              for a in {"<a.md-link-external/>"}
+                set a.target to "_blank"
+                set a.rel to "noopener noreferrer"
+              end
+          </script>
+        </article>
+      </section>
     </Main>
   );
 };

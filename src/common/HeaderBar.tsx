@@ -6,9 +6,11 @@ export interface Props {
 
 export const HeaderBar = ({ isLoggedIn }: Props) => {
   return (
-    <header class="w-full p-4 bg-black text-green-400 font-mono text-xl border-2 border-green-400 flex items-center justify-between">
+    <header class="w-full p-4 bg-black text-green-400 font-mono text-xl border-2 border-green-400 flex items-center justify-between sticky top-0 left-0 right-0 z-50">
       <a href="/" title="Home">
-        <h1 class="text-4xl font-['VT323'] uppercase leading-none">Snip</h1>
+        <h1 class="text-4xl hover:text-green-500 transition-all font-['VT323'] uppercase leading-none">
+          Snip
+        </h1>
       </a>
       <nav class="ml-3 font-mono">
         <ul class="flex items-center space-x-8">
@@ -18,7 +20,7 @@ export const HeaderBar = ({ isLoggedIn }: Props) => {
                 <a
                   href="/snips"
                   title="Snips"
-                  class="hover:underline lowercase flex space-x-2"
+                  class="hover:underline hover:text-blue-500 transition-all lowercase flex space-x-2"
                 >
                   <span class="mt-0.5">{feather.icons.scissors.toSvg()}</span>
                   <span>Snips</span>
@@ -27,7 +29,7 @@ export const HeaderBar = ({ isLoggedIn }: Props) => {
               <li>
                 <a
                   href="/settings"
-                  class="hover:underline lowercase flex space-x-2"
+                  class="hover:underline hover:text-blue-500 transition-all lowercase flex space-x-2"
                 >
                   <span class="mt-0.5">{feather.icons.settings.toSvg()}</span>
                   <span>Settings</span>
@@ -37,7 +39,7 @@ export const HeaderBar = ({ isLoggedIn }: Props) => {
                 <a
                   href="/logout"
                   title="Log out"
-                  class="cursor-pointer mt-1.5 [&>svg]:size-5 md:[&>svg]:size-6"
+                  class="cursor-pointer hover:text-yellow-300 transition-all mt-1.5 [&>svg]:size-5 md:[&>svg]:size-6"
                 >
                   {feather.icons["log-out"].toSvg()}
                 </a>
