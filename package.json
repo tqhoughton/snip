@@ -9,6 +9,7 @@
     "cdk": "cdk",
     "format": "npx prettier . --write",
     "start": "npm run start:api & npm run tailwind -- --watch & npm run build:scripts -- -w",
+    "dev": "npm run start",
     "db:migrate": "ts-node -r tsconfig-paths/register src/schemaManager.ts",
     "start:api": "nodemon --exec npx ts-node -r tsconfig-paths/register src/app.tsx",
     "tailwind": "npx tailwindcss -i ./src/globals.css -o ./public/styles/tailwind.css",

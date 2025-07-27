@@ -19,6 +19,9 @@ In `src/migrations` is a list of SQL files that the schemaManager function will 
 
 ## Future Work
 
+- [ ] add some kind of tests - Cypress maybe?
+- [ ] ability to search across all your snips
+
 ### Nice-to-haves
 
-- [ ] syntax highlighting on code blocks
+- [ ] make sidebar have folder/file structure

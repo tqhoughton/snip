@@ -5,7 +5,6 @@ import DOMPurify from "isomorphic-dompurify";
 import feather from "feather-icons";
 
 import type { Request } from "src/utils/request";
-import { logger } from "src/utils/logger";
 import { getSnippetByPath } from "./queries";
 import { SnippetMenu } from "./SnippetMenu";
 import { Main } from "./Main";
