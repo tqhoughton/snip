@@ -47,3 +47,62 @@ pre code.hljs {
   background: none;
   padding: 0;
 }
+
+/* view transitions */
+/* if there are issues with this take it up w/ Grok */
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root) {
+  animation: crt-blur-out 0.3s ease-in both;
+}
+
+::view-transition-new(root) {
+  animation: crt-blur-in 0.3s ease-out both;
+}
+
+@keyframes crt-blur-in {
+  from {
+    opacity: 0;
+    filter: blur(4px) brightness(0.8);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0) brightness(1);
+  }
+}
+
+@keyframes crt-blur-out {
+  from {
+    opacity: 1;
+    filter: blur(0) brightness(1);
+  }
+  to {
+    opacity: 0;
+    filter: blur(4px) brightness(0.8);
+  }
+}
+
+::view-transition-new(root)::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    transparent 0,
+    transparent 2px,
+    rgba(0, 0, 0, 0.1) 3px,
+    rgba(0, 0, 0, 0.1) 4px
+  );
+  pointer-events: none;
+  animation: scanline-flicker 0.1s infinite;
+}
+
+@keyframes scanline-flicker {
+  0% { opacity: 0.4; }
+  50% { opacity: 0.6; }
+  100% { opacity: 0.4; }
+}
