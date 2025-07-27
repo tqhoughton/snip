@@ -24,7 +24,7 @@ export const Layout = ({
   return (
     <>
       {"<!doctype html>"}
-      <html class="h-full overflow-y-scroll overflow-x-hidden">
+      <html class="h-full overflow-y-scroll scroll-mt-70 overflow-x-hidden">
         <head>
           <title>{title}</title>
           <meta

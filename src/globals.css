@@ -85,7 +85,7 @@ pre code.hljs {
 }
 
 ::view-transition-new(root)::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -102,7 +102,13 @@ pre code.hljs {
 }
 
 @keyframes scanline-flicker {
-  0% { opacity: 0.4; }
-  50% { opacity: 0.6; }
-  100% { opacity: 0.4; }
+  0% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0.4;
+  }
 }

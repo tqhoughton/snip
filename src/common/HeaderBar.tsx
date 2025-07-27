@@ -6,7 +6,7 @@ export interface Props {
 
 export const HeaderBar = ({ isLoggedIn }: Props) => {
   return (
-    <header class="w-full p-4 bg-black text-green-400 font-mono text-xl border-2 border-green-400 flex items-center justify-between sticky top-0 left-0 right-0 z-50">
+    <header class="w-full p-4 bg-black text-green-400 font-mono text-xl border-2 border-green-400 flex items-center justify-between relative">
       <a href="/" title="Home">
         <h1 class="text-4xl hover:text-green-500 transition-all font-['VT323'] uppercase leading-none">
           Snip
