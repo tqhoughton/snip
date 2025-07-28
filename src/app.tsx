@@ -95,16 +95,16 @@ const errorHandler: () => ErrorRequestHandler =
 app.use(errorHandler());
 
 app.listen(port, () => {
-  logger.info(`Example app listening at http://localhost:${port}`);
+  logger.debug(`Example app listening at http://localhost:${port}`);
 });
 
 // SIGTERM Handler
 process.on("SIGTERM", async () => {
-  logger.info("[express] SIGTERM received");
-  logger.info("[express] cleaning up");
+  logger.debug("[express] SIGTERM received");
+  logger.debug("[express] cleaning up");
   // add any necessary cleanup here
   await closeDbConnection();
 
-  logger.info("[express] exiting");
+  logger.debug("[express] exiting");
   process.exit(0);
 });

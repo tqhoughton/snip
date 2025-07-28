@@ -19,14 +19,14 @@ export class SnipStack extends cdk.Stack {
       name: "snip-db",
     });
 
-    const schemaManager = new SchemaManagerLambda(this, "SchemaManager", {
+    new SchemaManagerLambda(this, "SchemaManager", {
       name: "snip-db-schema-manager",
       clusterArn: db.cluster.attrResourceArn,
       clusterIdentifier: db.cluster.attrIdentifier,
       entry: path.resolve(__dirname, "../src/schemaManager.ts"),
     });
 
-    const service = new HttpService(this, "SnipService", {
+    new HttpService(this, "SnipService", {
       name: "snip-service",
       clusterArn: db.cluster.attrResourceArn,
       clusterIdentifier: db.cluster.attrIdentifier,
@@ -36,14 +36,6 @@ export class SnipStack extends cdk.Stack {
         CLIENT_ID: process.env.CLIENT_ID,
         SECRET: process.env.SECRET,
       },
-    });
-
-    new cdk.CfnOutput(this, "SnipServiceHttpUrl", {
-      value: service.fnUrl.url,
-    });
-
-    new cdk.CfnOutput(this, "SnipDbArn", {
-      value: db.cluster.attrResourceArn,
     });
   }
 }

@@ -51,6 +51,9 @@ export class HttpService extends Construct {
           beforeBundling: (): string[] => [],
           beforeInstall: (): string[] => [],
         },
+        esbuildArgs: {
+          "--log-override:ignored-bare-import": "silent",
+        }
       },
     });
 
