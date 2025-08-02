@@ -58,7 +58,6 @@ app.use((req, res) => {
     <Layout
       rid={rid}
       req={req}
-      showHeader={true}
       title="Not Found"
       children={<NotFoundPage />}
     />
@@ -81,7 +80,6 @@ const errorHandler: () => ErrorRequestHandler =
         <Layout
           rid={rid}
           req={req}
-          showHeader={true}
           title="Oops!"
           children={<ErrorPage error={error} />}
         />
