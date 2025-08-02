@@ -10,7 +10,6 @@ import { ErrorBoundary } from "./ErrorBoundary";
 export interface Props extends PropsWithChildren {
   rid: string | number;
   title: string;
-  showHeader?: boolean;
   req: Request;
 }
 
@@ -18,7 +17,6 @@ export const Layout = ({
   rid,
   req,
   title,
-  showHeader = true,
   children,
 }: Props) => {
   return (
@@ -83,9 +81,7 @@ export const Layout = ({
         </head>
         <body class="bg-black flex flex-col min-h-full grow items-center justify-center">
           <ErrorBoundary>
-            {showHeader && (
-              <HeaderBar isLoggedIn={req.oidc.isAuthenticated()} />
-            )}
+            <HeaderBar isLoggedIn={req.oidc.isAuthenticated()} />
             <Suspense rid={rid} fallback={<Loading />}>
               <ErrorBoundary>{children}</ErrorBoundary>
             </Suspense>
